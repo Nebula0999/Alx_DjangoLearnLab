@@ -3,7 +3,7 @@ from .models import Book
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Book
-from .forms import BookForm  
+from .forms import BookForm, ExampleForm 
 
 def book_list(request):
       """Retrieves all books and renders a template displaying the list."""
@@ -63,3 +63,6 @@ def submit_book(request):
     else:
         form = BookForm()
     return render(request, 'bookshelf/form_example.html', {'form': form})
+
+def current_book(ExampleForm):
+    return 

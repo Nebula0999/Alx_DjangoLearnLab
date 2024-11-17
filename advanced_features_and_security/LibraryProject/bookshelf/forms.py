@@ -21,5 +21,7 @@ def submit_book(request):
     else:
         form = BookForm()
     return render(request, 'bookshelf/form_example.html', {'form': form})
-    def ExampleForm():
-        return form
+
+
+def ExampleForm(Book):
+    return Book.title
