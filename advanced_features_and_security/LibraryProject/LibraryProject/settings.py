@@ -164,3 +164,6 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
 SECURE_HSTS_PRELOAD = True  # Allow the domain to be included in the HSTS preload list
 SESSION_COOKIE_SECURE = True  # Only send session cookies over HTTPS
 CSRF_COOKIE_SECURE = True  # Only send CSRF cookies over HTTPS
+
+SECURE_PROXY_SSL_HEADER = True
+HTTP_X_FORWARDED_PROTO = True
