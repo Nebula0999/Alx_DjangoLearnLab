@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'relationship.apps.RelationshipAppConfig',
+    'csp'
 ]
-
+# CSRF_COOKIE_SECURE: Ensures the CSRF cookie is only sent over HTTPS to prevent interception.
+# SECURE_HSTS_SECONDS: Enforces HTTPS for a set duration, helping to protect against protocol downgrade attacks.
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -48,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
+
 ]
 
 ROOT_URLCONF = 'LibraryProject.urls'
@@ -123,3 +129,29 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'relationship_app.models.User', 'bookshelf.CustomUser'
+
+
+# Set DEBUG to False in production
+DEBUG = False
+
+# Allowed hosts to prevent HTTP Host header attacks
+ALLOWED_HOSTS = ['your-domain.com', 'localhost']
+
+# Security settings
+SECURE_BROWSER_XSS_FILTER = True  # Enable browser's XSS protection
+X_FRAME_OPTIONS = 'DENY'  # Prevent the site from being embedded in iframes (clickjacking protection)
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent browsers from MIME-type sniffing
+
+# CSRF and session cookie security
+CSRF_COOKIE_SECURE = True  # Ensure CSRF cookie is sent over HTTPS
+SESSION_COOKIE_SECURE = True  # Ensure session cookie is sent over HTTPS
+
+# Enable Content Security Policy (CSP)
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", 'trustedscripts.example.com')
+CSP_STYLE_SRC = ("'self'", 'trustedstyles.example.com')
+
+# Additional secure headers
+SECURE_HSTS_SECONDS = 31536000  # Enforce HTTP Strict Transport Security for one year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allow the domain to be included in browsers' HSTS preload list
