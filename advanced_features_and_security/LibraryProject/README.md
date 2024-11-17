@@ -35,3 +35,29 @@ def edit_book(request, pk):
 1. Manually tested all input forms to ensure CSRF tokens are present.
 2. Checked CSP by inspecting browser console logs for violations.
 3. Validated that forms are protected against XSS by submitting malicious scripts and confirming they are sanitized.
+
+# Django Application Security Enhancements
+
+## Security Settings in `settings.py`
+- **SECURE_SSL_REDIRECT**: Redirects all HTTP traffic to HTTPS.
+- **SECURE_HSTS_SECONDS**: Enables HTTP Strict Transport Security for one year.
+- **SESSION_COOKIE_SECURE** and **CSRF_COOKIE_SECURE**: Ensures cookies are only transmitted over secure connections.
+- **X_FRAME_OPTIONS**: Set to `DENY` to prevent clickjacking.
+- **SECURE_CONTENT_TYPE_NOSNIFF**: Stops browsers from MIME-sniffing responses.
+- **SECURE_BROWSER_XSS_FILTER**: Activates browser's XSS filter for enhanced security.
+
+## Deployment Configuration
+- The Nginx configuration includes SSL/TLS directives and headers to enforce secure communication.
+- Ensure SSL certificates are correctly installed and renewed as needed.
+
+## Security Review
+### Measures Implemented:
+- **HTTPS Enforcement**: Redirects and SSL configurations ensure secure data transmission.
+- **HSTS**: Protects against protocol downgrade attacks and ensures future requests use HTTPS.
+- **Secure Cookies**: Mitigates risks of session hijacking by requiring cookies over HTTPS.
+- **XSS and Clickjacking Protection**: Headers prevent content-type sniffing, XSS attacks, and iframe embedding.
+
+### Potential Areas for Improvement:
+- Regularly monitor and renew SSL certificates.
+- Implement periodic security testing using tools like **OWASP ZAP**.
+- Review third-party packages for vulnerabilities and keep them updated.
