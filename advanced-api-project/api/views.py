@@ -7,6 +7,7 @@ from .serializers import BookSerializer
 from .permisssions import IsAdminOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework import filters
 # ListView for retrieving all books
 class BookListView(generics.ListAPIView):
     """
@@ -31,7 +32,7 @@ class BookListView(generics.ListAPIView):
     filterset_fields = ['title', 'author__name', 'publication_year']
     search_fields = ['title', 'author__name']
     ordering_fields = ['title', 'publication_year']
-    ordering = ['title']
+    ordering = filters.OrderingFilter['title']
 
 # DetailView for retrieving a single book by ID
 class BookDetailView(generics.RetrieveAPIView):
