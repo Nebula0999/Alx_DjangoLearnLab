@@ -13,3 +13,27 @@
 
 ## Testing
 Use tools like Postman or curl to interact with the API. Ensure proper tokens are passed in the `Authorization` header for write operations.
+# API Enhancements: Filtering, Searching, and Ordering
+
+## Features
+1. **Filtering**:
+   - Filter books by title, author name, or publication year.
+   - Examples:
+     - `/books/?title=Harry Potter`
+     - `/books/?author__name=J.K. Rowling`
+     - `/books/?publication_year=1997`
+
+2. **Searching**:
+   - Perform text searches on book titles or author names.
+   - Examples:
+     - `/books/?search=Harry`
+     - `/books/?search=Rowling`
+
+3. **Ordering**:
+   - Sort books by title or publication year.
+   - Examples:
+     - `/books/?ordering=title` (Ascending)
+     - `/books/?ordering=-publication_year` (Descending)
+
+## Testing
+Use tools like Postman or curl to test the API endpoints with various query parameters.
