@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Comment
 from taggit.forms import TagWidget
+from .models import Post
 
 class UserRegisterForm(UserCreationForm):
     """
@@ -24,7 +25,7 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'content': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Write your comment here...'}),
         }
-class PostForm(forms.ModelForm):
+class PostForm(forms.ModelForm, TagWidget()):
     """
     Form for creating or updating a blog post, including tags.
     """
