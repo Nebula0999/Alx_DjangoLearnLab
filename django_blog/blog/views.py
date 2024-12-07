@@ -5,7 +5,9 @@ from django.contrib import messages
 from .forms import UserRegisterForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post
+from .models import Post, Comment
+from django.shortcuts import get_object_or_404, redirect
+from .forms import CommentForm
 
 # Register view
 def register(request):
@@ -83,4 +85,53 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author
+    
+@login_required
+def add_comment(request, post_id):
+    """
+    Add a comment to a specific post.
+    """
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            messages.success(request, 'Your comment has been added!')
+            return redirect('post-detail', pk=post_id)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/comment_form.html', {'form': form, 'post': post})
+
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """
+    Edit an existing comment.
+    """
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/comment_form.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        comment = self.get_object()
+        return self.request.user == comment.author
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """
+    Delete an existing comment.
+    """
+    model = Comment
+    template_name = 'blog/comment_confirm_delete.html'
+
+    def get_success_url(self):
+        return self.object.post.get_absolute_url()
+
+    def test_func(self):
+        comment = self.get_object()
+        return self.request.user == comment.author
 # Create your views here.

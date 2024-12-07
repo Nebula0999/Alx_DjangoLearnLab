@@ -32,3 +32,22 @@
 2. **Permissions**:
    - Authenticated users can create posts.
    - Only post authors can edit or delete their posts.
+# Comment System
+
+## Features
+1. Add comments to blog posts.
+2. Edit and delete comments (authors only).
+3. Display all comments under each blog post.
+
+## URLs
+- `/posts/<post_id>/comments/new/`: Add a new comment.
+- `/comments/<comment_id>/edit/`: Edit a comment.
+- `/comments/<comment_id>/delete/`: Delete a comment.
+
+## Permissions
+- Authenticated users can add comments.
+- Only comment authors can edit or delete their comments.
+
+## Testing
+1. Test adding, editing, and deleting comments.
+2. Verify that unauthorized users cannot perform restricted actions.
