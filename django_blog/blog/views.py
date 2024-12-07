@@ -146,4 +146,9 @@ def search_posts(request):
         Q(title__icontains=query) | Q(content__icontains=query) | Q(tags__name__icontains=query)
     ).distinct()
     return render(request, 'blog/search_results.html', {'query': query, 'results': results})
+
+def PostByTagListView(search_posts):
+    return search_posts
+
+
 # Create your views here.
