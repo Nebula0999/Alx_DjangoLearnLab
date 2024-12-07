@@ -20,8 +20,7 @@ class BookSerializer(serializers.ModelSerializer):
             return value
 
 class AuthorSerializer(serializers.ModelSerializer):
-    many=True
-    read_only=True
+    book = BookSerializer(many=True, read_only=True)
     """
     Serializer for the Author model.
     Includes a nested serialization of books written by the author.
