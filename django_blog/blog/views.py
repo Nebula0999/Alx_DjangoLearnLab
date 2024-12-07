@@ -87,7 +87,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == post.author
     
 @login_required
-def add_comment(request, post_id):
+def CommentCreateView(request, post_id):
     """
     Add a comment to a specific post.
     """
