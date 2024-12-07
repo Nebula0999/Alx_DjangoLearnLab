@@ -22,3 +22,13 @@
 1. Run the Django development server:
    ```bash
    python manage.py runserver
+1. **CRUD Operations**:
+   - List all posts (`/posts/`).
+   - View a single post (`/posts/<id>/`).
+   - Create a post (`/posts/new/`).
+   - Edit a post (`/posts/<id>/edit/`).
+   - Delete a post (`/posts/<id>/delete/`).
+
+2. **Permissions**:
+   - Authenticated users can create posts.
+   - Only post authors can edit or delete their posts.
