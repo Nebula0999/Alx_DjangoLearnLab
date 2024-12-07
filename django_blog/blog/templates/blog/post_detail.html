@@ -4,8 +4,15 @@
 <h1>{{ object.title }}</h1>
 <p>{{ object.content }}</p>
 <small>By {{ object.author }} on {{ object.date_posted }}</small>
-{% if user == object.author %}
-    <a href="{% url 'post-update' object.pk %}">Edit</a>
-    <a href="{% url 'post-delete' object.pk %}">Delete</a>
-{% endif %}
+
+<hr>
+<h3>Tags</h3>
+{% for tag in object.tags.all %}
+    <a href="{% url 'posts-by-tag' tag.name %}" class="tag">{{ tag.name }}</a>
+{% endfor %}
+
+<hr>
+<h3>Comments</h3>
+{# Include existing comment functionality here #}
+
 {% endblock %}

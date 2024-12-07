@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Comment
 from django.shortcuts import get_object_or_404, redirect
 from .forms import CommentForm
+from django.db.models import Q
 
 # Register view
 def register(request):
@@ -134,4 +135,15 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         comment = self.get_object()
         return self.request.user == comment.author
+    
+
+def search_posts(request):
+    """
+    View to search posts based on title, content, or tags.
+    """
+    query = request.GET.get('q', '')
+    results = Post.objects.filter(
+        Q(title__icontains=query) | Q(content__icontains=query) | Q(tags__name__icontains=query)
+    ).distinct()
+    return render(request, 'blog/search_results.html', {'query': query, 'results': results})
 # Create your views here.

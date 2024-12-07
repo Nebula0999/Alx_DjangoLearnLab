@@ -51,3 +51,22 @@
 ## Testing
 1. Test adding, editing, and deleting comments.
 2. Verify that unauthorized users cannot perform restricted actions.
+# Tagging and Search Features
+
+## Tagging
+1. Tags can be added to blog posts during creation or editing.
+2. Each post detail page displays its associated tags.
+3. Clicking on a tag shows all posts with that tag.
+
+## Search
+1. Use the search bar to find posts by title, content, or tags.
+2. Results are displayed on a separate search results page.
+
+## URLs
+- `/search/`: Search posts by keywords.
+- `/tags/<tag_name>/`: View posts associated with a specific tag.
+
+## Testing
+1. Create a post with tags.
+2. Verify the tags are displayed correctly.
+3. Test the search bar with various queries to ensure accurate results.
