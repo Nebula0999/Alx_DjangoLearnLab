@@ -6,6 +6,7 @@ from rest_framework.authtoken.models import Token
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True)
+    new_user = serializers.CharField
     def create(self, validated_data):
         user = super().create(validated_data)
         Token.objects.create(user=user)  # Create a token for the user
