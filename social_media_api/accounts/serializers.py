@@ -31,3 +31,13 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = '__all__'
+
+class FollowSerializer(serializers.ModelSerializer):
+    following = serializers.StringRelatedField(many=True)
+    followers = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'username', 'following', 'followers')
+
+        

@@ -32,3 +32,45 @@ The model uses the tokens to assign permissions to users and allow them to acces
 ### Filtering and Pagination
 - **Filter Posts:** Add query parameters `?search={query}` for title or content.
 - **Pagination:** Add query parameters `?page={page_number}`.
+
+### Follow and Unfollow Endpoints
+- **Follow a User:** `POST /api/accounts/follow/<user_id>/`
+  - Requires authentication.
+  - Response:
+    ```json
+    {
+      "message": "You are now following <username>"
+    }
+    ```
+
+- **Unfollow a User:** `POST /api/accounts/unfollow/<user_id>/`
+  - Requires authentication.
+  - Response:
+    ```json
+    {
+      "message": "You have unfollowed <username>"
+    }
+    ```
+
+### Feed Endpoint
+- **Get the Feed:** `GET /api/posts/feed/`
+  - Requires authentication.
+  - Response:
+    ```json
+    [
+      {
+        "id": 1,
+        "author": "<username>",
+        "title": "Post Title",
+        "content": "Post Content",
+        "created_at": "<timestamp>",
+        "updated_at": "<timestamp>",
+        "comments": []
+      }
+    ]
+    ```
+
+### Notes on Following and Feed:
+- Users cannot follow themselves.
+- The feed only shows posts from users that are currently followed.
+- Posts are ordered by their creation date, newest first.
