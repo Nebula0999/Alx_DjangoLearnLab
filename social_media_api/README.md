@@ -15,3 +15,20 @@ The model utilizes the AbstractUser model to assign fields for user input nad re
 To login the user requests for an authentication token
 The model uses the tokens to assign permissions to users and allow them to access the page
 
+### Posts API
+- **List Posts:** `GET /api/posts/posts/`
+- **Create Post:** `POST /api/posts/posts/` (Authenticated)
+- **Retrieve Post:** `GET /api/posts/posts/{id}/`
+- **Update Post:** `PUT/PATCH /api/posts/posts/{id}/` (Author only)
+- **Delete Post:** `DELETE /api/posts/posts/{id}/` (Author only)
+
+### Comments API
+- **List Comments:** `GET /api/posts/comments/`
+- **Create Comment:** `POST /api/posts/comments/` (Authenticated)
+- **Retrieve Comment:** `GET /api/posts/comments/{id}/`
+- **Update Comment:** `PUT/PATCH /api/posts/comments/{id}/` (Author only)
+- **Delete Comment:** `DELETE /api/posts/comments/{id}/` (Author only)
+
+### Filtering and Pagination
+- **Filter Posts:** Add query parameters `?search={query}` for title or content.
+- **Pagination:** Add query parameters `?page={page_number}`.
