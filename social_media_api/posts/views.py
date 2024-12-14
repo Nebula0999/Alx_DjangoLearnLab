@@ -13,7 +13,7 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
         return obj.author == request.user
 
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all().order_by('-created_at')
+    queryset = Post.objects.filter(author__in=following_users).order_by('created_at')
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
 
