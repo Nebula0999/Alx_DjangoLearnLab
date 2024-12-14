@@ -74,3 +74,17 @@ The model uses the tokens to assign permissions to users and allow them to acces
 - Users cannot follow themselves.
 - The feed only shows posts from users that are currently followed.
 - Posts are ordered by their creation date, newest first.
+
+### Likes API
+- **Like a Post:** `POST /api/posts/<post_id>/like/`
+- **Unlike a Post:** `POST /api/posts/<post_id>/unlike/`
+
+### Notifications API
+- **List Notifications:** `GET /api/notifications/`
+- **Mark Notification as Read:** `POST /api/notifications/<notification_id>/read/`
+
+### Features
+- Notifications are generated for:
+  - Likes on posts
+  - New followers (can be added later)
+  - Comments (extendable)

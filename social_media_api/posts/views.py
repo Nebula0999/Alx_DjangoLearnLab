@@ -1,5 +1,5 @@
 from rest_framework import viewsets, permissions
-
+from rest_framework import generics
 from notifications.models import Notification
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer
@@ -52,6 +52,7 @@ class FeedView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 class LikePostView(APIView):
     permission_classes = [IsAuthenticated]
+    viewed_post = generics.get_object_or_404(Post, pk=pk)
 
     def post(self, request, pk):
         try:
