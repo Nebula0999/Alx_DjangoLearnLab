@@ -88,3 +88,20 @@ The model uses the tokens to assign permissions to users and allow them to acces
   - Likes on posts
   - New followers (can be added later)
   - Comments (extendable)
+
+# Deployment Instructions
+
+## Hosting Service
+- **Service:** AWS Elastic Beanstalk
+- **URL:** [your-app-name.elasticbeanstalk.com](http://your-app-name.elasticbeanstalk.com)
+
+## Environment Variables
+- `DEBUG`: `False`
+- `SECRET_KEY`: `your-production-secret-key`
+- `RDS_DB_NAME`, `RDS_USERNAME`, `RDS_PASSWORD`, `RDS_HOSTNAME`, `RDS_PORT`: Database credentials.
+
+## Deployment Steps
+1. Install AWS CLI and EB CLI.
+2. Initialize Elastic Beanstalk environment:
+   ```bash
+   eb init
